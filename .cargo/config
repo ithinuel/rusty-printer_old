@@ -1,6 +1,19 @@
-[target.thumbv7m-none-eabi]
+[target.thumbv7em-none-eabihf] # cortex-m4 fpu
 rustflags = [
   "-C", "link-arg=-Tlink.x", # <- NEW!
-  "-C", "linker=arm-none-eabi-ld",
-  "-Z", "linker-flavor=ld",
+]
+
+[target.thumbv7em-none-eabi] # cortex-m4
+rustflags = [
+  "-C", "link-arg=-Tlink.x", # <- NEW!
+]
+
+[target.thumbv7m-none-eabi] # cortex-m3
+rustflags = [
+  "-C", "link-arg=-Tlink.x", # <- NEW!
+]
+
+[target.thumbv6m-none-eabi] # cortex-m0+
+rustflags = [
+  "-C", "link-arg=-Tlink.x", # <- NEW!
 ]

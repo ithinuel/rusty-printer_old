@@ -11,10 +11,7 @@ members = [
 ]
 
 [profile.debug]
-lto = true
-
+# lto = true
 
 [profile.release]
-lto = true
-# debug = true
-
+# lto = true
