@@ -1,0 +1,53 @@
+[[package]]
+name = "rusty_bootloader"
+version = "0.1.0"
+dependencies = [
+ "silica_duet3d_duet2 0.1.0",
+]
+
+[[package]]
+name = "rusty_printer"
+version = "0.1.0"
+dependencies = [
+ "silica_duet3d_duet2 0.1.0",
+]
+
+[[package]]
+name = "silica"
+version = "0.1.0"
+
+[[package]]
+name = "silica_arm_cortexm"
+version = "0.1.0"
+dependencies = [
+ "silica 0.1.0",
+]
+
+[[package]]
+name = "silica_arm_cortexm4"
+version = "0.1.0"
+dependencies = [
+ "silica_arm_cortexm 0.1.0",
+]
+
+[[package]]
+name = "silica_atmel_sam4e"
+version = "0.1.0"
+dependencies = [
+ "silica_arm_cortexm4 0.1.0",
+]
+
+[[package]]
+name = "silica_atmel_sam4e8e"
+version = "0.1.0"
+dependencies = [
+ "silica_atmel_sam4e 0.1.0",
+]
+
+[[package]]
+name = "silica_duet3d_duet2"
+version = "0.1.0"
+dependencies = [
+ "silica_atmel_sam4e8e 0.1.0",
+]
+

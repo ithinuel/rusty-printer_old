@@ -1,0 +1,8 @@
+[package]
+name = "silica_arm_cortexm4"
+version = "0.1.0"
+authors = ["wilcha02"]
+
+[dependencies]
+silica_arm_cortexm = { path="../silica_arm_cortexm" }
+

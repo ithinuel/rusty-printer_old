@@ -1,0 +1,7 @@
+[package]
+name = "rusty_bootloader"
+version = "0.1.0"
+authors = ["wilcha02"]
+
+[dependencies]
+silica_duet3d_duet2 = { path = "../silica_duet3d_duet2" }

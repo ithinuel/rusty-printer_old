@@ -1,0 +1,7 @@
+[package]
+name = "silica_atmel_sam4e8e"
+version = "0.1.0"
+authors = ["wilcha02"]
+
+[dependencies]
+silica_atmel_sam4e = { path = "../silica_atmel_sam4e" }
