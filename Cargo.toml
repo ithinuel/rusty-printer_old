@@ -1,5 +1,4 @@
 [workspace]
-
 members = [
     "silica",
     "silica_arm_cortexm",
@@ -10,3 +9,12 @@ members = [
     "rusty_bootloader",
     "rusty_printer"
 ]
+
+[profile.debug]
+lto = true
+
+
+[profile.release]
+lto = true
+# debug = true
+

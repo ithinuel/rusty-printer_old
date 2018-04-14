@@ -4,9 +4,3 @@ rustflags = [
   "-C", "linker=arm-none-eabi-ld",
   "-Z", "linker-flavor=ld",
 ]
-
-[profile.dev]
-target = "thumbv7m-none-eabi"
-
-[build.release]
-target = "thumbv7m-none-eabi"

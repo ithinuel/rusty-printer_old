@@ -8,25 +8,26 @@ extern crate silica_arm_cortexm;
 // These functions are used by the compiler, but not
 // for a bare-bones hello world. These are normally
 // provided by libstd.
-#[lang = "eh_personality"]
 #[no_mangle]
+#[lang = "eh_personality"]
 pub fn rust_eh_personality() {
     unsafe { asm!("bkpt") }
 }
 
+/*
 // This function may be needed based on the compilation target.
-#[lang = "eh_unwind_resume"]
 #[no_mangle]
+#[lang = "eh_unwind_resume"]
 pub fn rust_eh_unwind_resume() {
     unsafe { asm!("bkpt") }
-}
+}*/
 
 #[no_mangle]
 #[lang = "panic_fmt"]
 pub fn panic_handler(_msg: core::fmt::Arguments,
-                               _file: &'static str,
-                               _line: u32,
-                               _column: u32) -> ! {
+                     _file: &'static str,
+                     _line: u32,
+                     _column: u32) -> ! {
     // use semihosting or failure cause buffer or stdout(a peripheral) or ITM
     unsafe { asm!("bkpt") }
     loop {}
@@ -90,9 +91,9 @@ pub unsafe extern "C" fn pendsv() {
 pub unsafe extern "C" fn systick() {
 }
 
-#[linkage = "external"]
+#[used]
 #[link_section = ".vector_table.exceptions_vector"]
-pub static EXCEPTIONS: Exceptions = Exceptions {
+static EXCEPTIONS: Exceptions = Exceptions {
     reset: start,  // RESET
     nmi: default_handler,   // NMI
     hard_fault: hf_handler,   // Hardfault
