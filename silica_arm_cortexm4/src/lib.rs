@@ -1,6 +1,6 @@
 #![feature(lang_items, asm, linkage, used, panic_runtime)]
 #![no_std]
-#![panic_runtime]
+#![cfg_attr(target_arch = "arm", panic_runtime)]
 
 extern crate silica_arm_cortexm;
 
@@ -9,6 +9,7 @@ extern crate silica_arm_cortexm;
 // for a bare-bones hello world. These are normally
 // provided by libstd.
 #[no_mangle]
+#[cfg(target_arch = "arm")]
 #[lang = "eh_personality"]
 pub fn rust_eh_personality() {
     unsafe { asm!("bkpt") }
@@ -23,7 +24,8 @@ pub fn rust_eh_unwind_resume() {
 }*/
 
 #[no_mangle]
-#[lang = "panic_fmt"]
+#[cfg(target_arch = "arm")]
+#[cfg_attr(not(test), lang = "panic_fmt")]
 pub fn panic_handler(_msg: core::fmt::Arguments,
                      _file: &'static str,
                      _line: u32,
