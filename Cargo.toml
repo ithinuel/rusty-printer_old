@@ -1,7 +1,6 @@
 [workspace]
 members = [
     "silica",
-    "silica_arm_cortexm",
     "silica_arm_cortexm4",
     "silica_atmel_sam4e",
     "silica_atmel_sam4e8e",

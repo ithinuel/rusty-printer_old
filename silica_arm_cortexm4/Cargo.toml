@@ -4,5 +4,6 @@ version = "0.1.0"
 authors = ["wilcha02"]
 
 [dependencies]
-silica_arm_cortexm = { path="../silica_arm_cortexm" }
-
+silica = { path = "../silica" }
+#bitfield = "^0.12.1"
+bitfield = { path = "../rust-bitfield" }

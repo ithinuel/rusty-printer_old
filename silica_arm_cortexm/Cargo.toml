@@ -1,7 +1,0 @@
-[package]
-name = "silica_arm_cortexm"
-version = "0.1.0"
-authors = ["wilcha02"]
-
-[dependencies]
-silica = { path = "../silica" }

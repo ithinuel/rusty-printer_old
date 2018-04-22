@@ -31,8 +31,9 @@ unsafe extern "C" fn start() -> ! {
 
     // system init
     main();
-    //silica_cortexm3::ppb::scb::system_reset();
-    loop {};
+    ::ppb::scb::SCB.as_mut().aircr.sys_reset_req(true);
+    debug_assert!(false, "should not be reached");
+    unreachable!();
 }
 
 unsafe extern "C" fn default_handler()  {

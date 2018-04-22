@@ -1,4 +1,8 @@
 [[package]]
+name = "bitfield"
+version = "0.12.1"
+
+[[package]]
 name = "rusty_bootloader"
 version = "0.1.0"
 dependencies = [
@@ -17,17 +21,11 @@ name = "silica"
 version = "0.1.0"
 
 [[package]]
-name = "silica_arm_cortexm"
-version = "0.1.0"
-dependencies = [
- "silica 0.1.0",
-]
-
-[[package]]
 name = "silica_arm_cortexm4"
 version = "0.1.0"
 dependencies = [
- "silica_arm_cortexm 0.1.0",
+ "bitfield 0.12.1",
+ "silica 0.1.0",
 ]
 
 [[package]]

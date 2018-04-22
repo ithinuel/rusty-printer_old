@@ -17,7 +17,6 @@ pub fn main() {
             B = _a;
         };
     }
-    panic!("Done");
 }
 
 #[cfg(test)]
