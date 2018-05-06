@@ -19,10 +19,12 @@ pub fn rust_eh_unwind_resume() {
 
 #[no_mangle]
 #[lang = "panic_fmt"]
-pub fn panic_handler(_msg: core::fmt::Arguments,
-                     _file: &'static str,
-                     _line: u32,
-                     _column: u32) -> ! {
+pub fn panic_handler(
+    _msg: core::fmt::Arguments,
+    _file: &'static str,
+    _line: u32,
+    _column: u32,
+) -> ! {
     // use semihosting or failure cause buffer or stdout(a peripheral) or ITM
     unsafe { asm!("bkpt") }
     loop {}

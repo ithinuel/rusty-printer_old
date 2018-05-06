@@ -12,6 +12,8 @@ EXTERN(EXCEPTIONS);
    object file that's passed to the linker *before* this crate */
 /* EXTERN(INTERRUPTS); */
 
+PROVIDE(SCB = 0xE000ED00);
+
 SECTIONS
 {
     .vector_table ORIGIN(FLASH) :

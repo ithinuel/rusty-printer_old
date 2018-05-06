@@ -1,3 +1,0 @@
-[submodule "rust-bitfield"]
-	path = rust-bitfield
-	url = git@github.com:ithinuel/rust-bitfield.git

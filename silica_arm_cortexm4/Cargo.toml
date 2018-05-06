@@ -6,4 +6,4 @@ authors = ["wilcha02"]
 [dependencies]
 silica = { path = "../silica" }
 #bitfield = "^0.12.1"
-bitfield = { path = "../rust-bitfield" }
+#bitfield = { path = "../rust-bitfield" }

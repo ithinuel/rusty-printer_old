@@ -1,8 +1,7 @@
-
 use core;
-use ::Exceptions;
+use Exceptions;
 
-extern {
+extern "C" {
     fn main();
 }
 
@@ -31,34 +30,30 @@ unsafe extern "C" fn start() -> ! {
 
     // system init
     main();
-    ::ppb::scb::SCB.as_mut().aircr.sys_reset_req(true);
+    ::ppb::scb::SCB.aircr.get_mut().sys_reset_request();
     debug_assert!(false, "should not be reached");
     unreachable!();
 }
 
-unsafe extern "C" fn default_handler()  {
-}
-unsafe extern "C" fn hf_handler() {
-}
-unsafe extern "C" fn pendsv() {
-}
-unsafe extern "C" fn systick() {
-}
+unsafe extern "C" fn default_handler() {}
+unsafe extern "C" fn hf_handler() {}
+unsafe extern "C" fn pendsv() {}
+unsafe extern "C" fn systick() {}
 
 #[cfg(target_arch = "arm")]
 #[link_section = ".vector_table.exceptions_vector"]
 #[no_mangle]
 pub static EXCEPTIONS: Exceptions = Exceptions {
-    reset: start,  // RESET
-    nmi: default_handler,   // NMI
-    hard_fault: hf_handler,   // Hardfault
-    mem_manage: default_handler,   // MemManage
+    reset: start,                 // RESET
+    nmi: default_handler,         // NMI
+    hard_fault: hf_handler,       // Hardfault
+    mem_manage: default_handler,  // MemManage
     bus_fault: default_handler,   // BusFault
-    usage_fault: default_handler,   // UsageFault
+    usage_fault: default_handler, // UsageFault
     reserved1: [0; 4],
-    sv_call: default_handler,   // SVCall
-    debug_monitor: default_handler,   // Debug Monitor
+    sv_call: default_handler,       // SVCall
+    debug_monitor: default_handler, // Debug Monitor
     reserved2: 0,
     pendsv: pendsv,   // PendSV
-    systick: systick,   // Systick
+    systick: systick, // Systick
 };

@@ -4,8 +4,7 @@
 extern crate silica_duet3d_duet2;
 
 #[cfg_attr(not(test), no_mangle)]
-pub fn main() {
-}
+pub fn main() {}
 
 #[cfg(test)]
 mod tests {
