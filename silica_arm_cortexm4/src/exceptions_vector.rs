@@ -31,6 +31,7 @@ unsafe extern "C" fn start() -> ! {
     // system init
     main();
     ::ppb::scb::SCB.aircr.get_mut().sys_reset_request();
+    let v = ::ppb::scb::SCB.aircr.get();
     debug_assert!(false, "should not be reached");
     unreachable!();
 }

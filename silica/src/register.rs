@@ -7,6 +7,15 @@ use core::fmt;
 use core::ops::{Deref, DerefMut, Not, ShrAssign};
 use core::mem::size_of;
 
+#[repr(C)]
+pub struct RegisterRoCell<T>(T);
+impl<T: Copy> RegisterRoCell<T> {
+    #[inline]
+    pub fn get(&self) -> T {
+        unsafe { ptr::read_volatile(&self.0 as *const _) }
+    }
+}
+
 ///
 #[repr(C)]
 pub struct RegisterCell<T>(T);

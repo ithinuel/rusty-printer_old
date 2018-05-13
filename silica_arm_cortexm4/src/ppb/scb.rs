@@ -1,8 +1,7 @@
 use core::fmt;
 use core::convert::{Into, TryInto, TryFrom};
-use silica::register::{RegisterCell, Field};
-
-//trace_macros!(true);
+use core::num::TryFromIntError;
+use silica::register::{RegisterRoCell, RegisterCell, Field};
 
 #[derive(Debug, Copy, Clone)]
 pub struct InvalidEndiannessError(());
@@ -210,6 +209,35 @@ register! {
     }
 }
 
+register! {
+    @impl_debug;
+    /// MemManage Fault Status Register
+    pub struct MMSRegister(u8) {
+        bool: pub is_valid, _: 7;
+        bool: pub fault_on_stacking_for_exception_entry, _: 4;
+        bool: pub fault_on_unstacking_for_a_return_from_exception, _: 3;
+        bool: pub data_access_violation, _: 1;
+        bool: pub instruction_access_violation, _: 0;
+    }
+}
+impl TryFrom<u32> for MMSRegister {
+    type Error = TryFromIntError;
+    fn try_from(v: u32) -> Result<Self, Self::Error> {
+        let w = v.try_into()?;
+        Ok(MMSRegister(w))
+    }
+}
+
+register! {
+    @impl_debug;
+    /// Configurable Fault Status Register
+    pub struct CFSRegister(u32) {
+        MMSRegister: pub get_mmsr, _: 7, 0;
+        // BFSRegister: pub get_bfsr, _: 15, 8;
+        // UFSRegister: pub get_ufsr, _: 31, 16;
+    }
+}
+
 /// System Control Block
 /// http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.dui0553a/CIHFDJCA.html
 #[repr(C)]
@@ -223,7 +251,7 @@ pub struct SystemControlBlock {
     pub ccr: RegisterCell<u32>,
     pub shp: [RegisterCell<u8>; 12],
     pub shcsr: RegisterCell<u32>,
-    pub cfsr: RegisterCell<u32>,
+    pub cfsr: RegisterRoCell<CFSRegister>,
     pub hfsr: RegisterCell<u32>,
     pub dfsr: RegisterCell<u32>,
     pub mmfar: RegisterCell<u32>,

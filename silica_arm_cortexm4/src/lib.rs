@@ -1,7 +1,7 @@
 #![feature(
     lang_items, asm, linkage, used, panic_runtime, naked_functions, core_intrinsics,
     integer_atomics, ptr_internals, const_fn,
-    macro_vis_matcher, try_from, trace_macros
+    macro_vis_matcher, try_from, never_type
 )]
 #![no_std]
 #![cfg_attr(target_arch = "arm", panic_runtime)]
