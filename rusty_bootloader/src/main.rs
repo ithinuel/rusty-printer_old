@@ -13,7 +13,7 @@ pub fn main() {
     while _a < 100 {
         _a += 1;
         unsafe {
-            A = _a; 
+            A = _a;
             B = _a;
         };
     }

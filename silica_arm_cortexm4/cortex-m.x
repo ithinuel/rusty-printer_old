@@ -12,7 +12,11 @@ EXTERN(EXCEPTIONS);
    object file that's passed to the linker *before* this crate */
 /* EXTERN(INTERRUPTS); */
 
+PROVIDE(ACTLR = 0xE000E008);
+PROVIDE(SYSTICK = 0xE000E010);
 PROVIDE(SCB = 0xE000ED00);
+PROVIDE(CPACR = 0xE000ED88);
+PROVIDE(STIR = 0xE000EF00);
 
 SECTIONS
 {
@@ -57,7 +61,7 @@ SECTIONS
 
     _estack = ORIGIN(RAM) + LENGTH(RAM);
     _sstack = ALIGN(_estack - (stack_size + 7), 8);
-    
+
     /* this section is to ensure we save enough room for the main stack. */
     .stack _sstack : {
         . = . + stack_size;

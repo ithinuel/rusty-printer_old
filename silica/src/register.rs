@@ -2,14 +2,17 @@
 //!
 //!
 
-use core::ptr;
 use core::fmt;
-use core::ops::{Deref, DerefMut, Not, ShrAssign};
 use core::mem::size_of;
+use core::ops::{Deref, DerefMut, Not, ShrAssign};
+use core::ptr;
 
 #[repr(C)]
-pub struct RegisterRoCell<T>(T);
-impl<T: Copy> RegisterRoCell<T> {
+pub struct ReservedCell<T>(T);
+
+#[repr(C)]
+pub struct RoRegisterCell<T>(T);
+impl<T: Copy> RoRegisterCell<T> {
     #[inline]
     pub fn get(&self) -> T {
         unsafe { ptr::read_volatile(&self.0 as *const _) }

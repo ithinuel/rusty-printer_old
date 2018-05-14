@@ -30,8 +30,7 @@ unsafe extern "C" fn start() -> ! {
 
     // system init
     main();
-    ::ppb::scb::SCB.aircr.get_mut().sys_reset_request();
-    let v = ::ppb::scb::SCB.aircr.get();
+    ::ppb::SCB.aircr.get_mut().sys_reset_request();
     debug_assert!(false, "should not be reached");
     unreachable!();
 }
@@ -44,6 +43,7 @@ unsafe extern "C" fn systick() {}
 #[cfg(target_arch = "arm")]
 #[link_section = ".vector_table.exceptions_vector"]
 #[no_mangle]
+#[used]
 pub static EXCEPTIONS: Exceptions = Exceptions {
     reset: start,                 // RESET
     nmi: default_handler,         // NMI
