@@ -1,5 +1,4 @@
 //! CM4's Private Peripheral Bus
-use core::convert::TryInto;
 use core::fmt;
 use silica::register::{Field, RegisterCell};
 
