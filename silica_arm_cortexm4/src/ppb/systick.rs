@@ -1,6 +1,6 @@
 use core::convert::{Into, TryInto};
 use core::fmt;
-use silica::register::{Field, RegisterCell, RoRegisterCell};
+use silica::register::{Field, RegisterCell, RoRegisterCell, MyTryInto};
 
 register! {
     @impl_debug;

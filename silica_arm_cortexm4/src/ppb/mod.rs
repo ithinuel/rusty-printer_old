@@ -1,7 +1,6 @@
 //! CM4's Private Peripheral Bus
-use core::convert::TryInto;
 use core::fmt;
-use silica::register::{Field, RegisterCell};
+use silica::register::{Field, RegisterCell, MyTryInto};
 
 pub mod scb;
 pub mod systick;

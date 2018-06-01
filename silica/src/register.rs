@@ -19,6 +19,17 @@ impl<T: Copy> RoRegisterCell<T> {
     }
 }
 
+pub trait MyTryInto<T> {
+    fn try_into(self) -> Result<T, ()>;
+}
+
+impl MyTryInto<bool> for u32 {
+    fn try_into(self) -> Result<bool, ()> {
+        Ok(self != 0)
+    }
+}
+
+
 ///
 #[repr(C)]
 pub struct RegisterCell<T>(T);
@@ -113,6 +124,12 @@ impl Field {
 
 #[macro_export]
 macro_rules! register_field {
+    (bool: $(#[$attr:meta])* $vis:vis $name:ident, _: $id:expr) => {
+        $(#[$attr])*
+        $vis fn $name(&self) -> bool {
+            self.extract(&Self::FIELDS[$id]) != 0
+        }
+    };
     ($t:ty: $(#[$attr:meta])* $vis:vis $name:ident, _: $id:expr) => {
         $(#[$attr])*
         $vis fn $name(&self) -> $t {
@@ -129,6 +146,19 @@ macro_rules! register_field {
 
 #[macro_export]
 macro_rules! register_fields {
+    (([$(($fields:expr))*],$id:expr): $(#[$attr:meta])* bool: $(#[$gattr:meta])* $gvis:vis $getter:ident, $(#[$sattr:meta])* $svis:vis $setter:ident: $bit:expr; $($rest:tt)*) => {
+        register_field!(bool: $(#[$attr])* $(#[$gattr])* $gvis $getter, _: $id);
+        register_field!(bool: _, $(#[$attr])* $(#[$sattr])* $svis $setter: $id);
+        register_fields!(([$(($fields))* (Field::new($bit, $bit))], $id + 1): $($rest)*);
+    };
+    (([$(($fields:expr))*],$id:expr): $(#[$attr:meta])* bool: $(#[$gattr:meta])* $gvis:vis $getter:ident, _: $bit:expr; $($rest:tt)*) => {
+        register_field!(bool: $(#[$attr])* $(#[$gattr])* $gvis $getter, _: $id);
+        register_fields!(([$(($fields))* (Field::new($bit, $bit))], $id + 1): $($rest)*);
+    };
+    (([$(($fields:expr))*],$id:expr): $(#[$attr:meta])* bool: _, $(#[$sattr:meta])* $svis:vis $setter:ident: $bit:expr; $($rest:tt)*) => {
+        register_field!(bool: _, $(#[$attr])* $(#[$sattr])* $svis $setter: $id);
+        register_fields!(([$(($fields))* (Field::new($bit, $bit))], $id + 1): $($rest)*);
+    };
     (([$(($fields:expr))*],$id:expr): $(#[$attr:meta])* $t:ty: $(#[$gattr:meta])* $gvis:vis $getter:ident, $(#[$sattr:meta])* $svis:vis $setter:ident: $bit:expr; $($rest:tt)*) => {
         register_field!($t: $(#[$attr])* $(#[$gattr])* $gvis $getter, _: $id);
         register_field!($t: _, $(#[$attr])* $(#[$sattr])* $svis $setter: $id);

@@ -1,7 +1,7 @@
 use core::convert::{Into, TryFrom, TryInto};
 use core::fmt;
 use core::num::TryFromIntError;
-use silica::register::{Field, RegisterCell, ReservedCell, RoRegisterCell};
+use silica::register::{Field, RegisterCell, ReservedCell, RoRegisterCell, MyTryInto};
 
 #[derive(Debug, Copy, Clone)]
 pub struct InvalidEndiannessError(());
