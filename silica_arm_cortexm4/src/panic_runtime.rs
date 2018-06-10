@@ -1,5 +1,3 @@
-use core;
-
 // These functions are used by the compiler, but not
 // for a bare-bones hello world. These are normally
 // provided by libstd.
@@ -18,13 +16,8 @@ pub fn rust_eh_unwind_resume() {
 }*/
 
 #[no_mangle]
-#[lang = "panic_fmt"]
-pub fn panic_handler(
-    _msg: core::fmt::Arguments,
-    _file: &'static str,
-    _line: u32,
-    _column: u32,
-) -> ! {
+#[panic_implementation]
+pub fn panic_handler(_: &::core::panic::PanicInfo) -> ! {
     // use semihosting or failure cause buffer or stdout(a peripheral) or ITM
     unsafe { asm!("bkpt") }
     loop {}
