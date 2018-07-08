@@ -43,7 +43,7 @@ register! {
     }
 }
 impl STCRegister {
-    pub fn ten_millisecond(&self) -> Option<u32> {
+    pub fn ten_millisecond(self) -> Option<u32> {
         let f = Field::new(23, 0);
         match self.extract(&f) {
             0 => None,

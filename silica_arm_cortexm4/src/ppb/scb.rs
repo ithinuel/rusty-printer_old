@@ -108,7 +108,7 @@ impl VectorTableOffsetRegister {
     /// you require 21 interrupts, the alignment must be on a 64-word boundary because the required
     /// table size is 37 words, and the next power of two is 64. See your vendor documentation for
     /// the alignment details of your device.
-    pub fn offset(&self) -> u32 {
+    pub fn offset(self) -> u32 {
         self.0 & !0x7F
     }
 
@@ -145,7 +145,7 @@ register! {
 }
 impl AIRCRegister {
     #[inline]
-    fn extract(&self, f: &Field) -> u32 {
+    fn extract(self, f: &Field) -> u32 {
         (self.0 >> f.lsb()) & f.mask::<u32>()
     }
     #[inline]
