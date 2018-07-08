@@ -86,7 +86,7 @@ pub struct Field {
 }
 impl Field {
     pub const fn new(msb: usize, lsb: usize) -> Field {
-        Field { msb: msb, lsb: lsb }
+        Field { msb, lsb }
     }
     #[inline]
     pub fn lsb(&self) -> usize {

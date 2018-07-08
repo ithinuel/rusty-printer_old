@@ -156,9 +156,11 @@ impl AIRCRegister {
     }
 
     #[inline]
-    pub fn sys_reset_request(&mut self) {
+    pub fn sys_reset_request(&mut self) -> ! {
         let f = Field::new(2, 2);
         self.insert(&f, 1);
+        // we may need a barrier here
+        unreachable!();
     }
 }
 

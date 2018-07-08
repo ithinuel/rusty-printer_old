@@ -31,14 +31,12 @@ unsafe extern "C" fn start() -> ! {
     // system init
     main();
     ::ppb::SCB.aircr.get_mut().sys_reset_request();
-    debug_assert!(false, "should not be reached");
-    unreachable!();
 }
 
 unsafe extern "C" fn default_handler() {}
 unsafe extern "C" fn hf_handler() {}
-unsafe extern "C" fn pendsv() {}
-unsafe extern "C" fn systick() {}
+unsafe extern "C" fn pendsv_handler() {}
+unsafe extern "C" fn systick_handler() {}
 
 #[cfg(target_arch = "arm")]
 #[link_section = ".vector_table.exceptions_vector"]
@@ -55,6 +53,6 @@ pub static EXCEPTIONS: Exceptions = Exceptions {
     sv_call: default_handler,       // SVCall
     debug_monitor: default_handler, // Debug Monitor
     reserved2: 0,
-    pendsv: pendsv,   // PendSV
-    systick: systick, // Systick
+    pendsv: pendsv_handler,   // PendSV
+    systick: systick_handler, // Systick
 };

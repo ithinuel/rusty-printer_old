@@ -19,6 +19,8 @@ pub fn rust_eh_unwind_resume() {
 #[panic_implementation]
 pub fn panic_handler(_: &::core::panic::PanicInfo) -> ! {
     // use semihosting or failure cause buffer or stdout(a peripheral) or ITM
-    unsafe { asm!("bkpt") }
-    loop {}
+    unsafe {
+        asm!("bkpt");
+        ::ppb::SCB.aircr.get_mut().sys_reset_request();
+    }
 }

@@ -78,5 +78,5 @@ pub struct FloatingPointUnit {
     pub ccr: RegisterCell<FPCCRegister>,
     pub car: RegisterCell<FPCARegister>,
     pub scr: RegisterCell<FPSCRegister>,
-    pub dscr: RegisterCell<FPDSCRegister>
+    pub dscr: RegisterCell<FPDSCRegister>,
 }
